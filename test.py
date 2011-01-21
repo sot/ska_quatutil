@@ -36,4 +36,24 @@ def test_yagzag2radec():
     assert_almost_equal( tra, ra2)
     assert_almost_equal( tdec, dec2)
     
-    
+def test_vectorized_radec():
+    ras = np.arange(10)
+    decs = np.arange(10)
+    ecis = Ska.quatutil.radec2eci(ras, decs)
+    assert_equal(ecis.shape, (3, 10))
+    ra1s, dec1s = Ska.quatutil.eci2radec(ecis)
+    for ra, ra1, dec, dec1 in zip(ras, ra1s, decs, dec1s):
+        assert_almost_equal(ra, ra1)
+        assert_almost_equal(dec, dec1)
+
+def test_vectorized_yagzag():
+    ras = np.arange(1,11)
+    decs = np.arange(1,11)
+    yags, zags = Ska.quatutil.radec2yagzag(ras, decs, q0)
+    assert_equal(yags.shape, (10,))
+    assert_equal(zags.shape, (10,))
+    ra1s, dec1s = Ska.quatutil.yagzag2radec(yags, zags, q0)
+    for ra, ra1, dec, dec1 in zip(ras, ra1s, decs, dec1s):
+        assert_almost_equal(ra, ra1)
+        assert_almost_equal(dec, dec1)
+        
