@@ -57,3 +57,24 @@ def test_vectorized_yagzag():
         assert_almost_equal(ra, ra1)
         assert_almost_equal(dec, dec1)
         
+def test_quat_x_to_vec():
+    vecs = np.random.random((100, 3)) - 0.5
+    for vec in vecs:
+        vec = Ska.quatutil._norm(vec)
+        q = Ska.quatutil.quat_x_to_vec(vec, keep_z=False)
+        vec1 = np.dot(q.transform, [1.0, 0, 0])
+        for i in range(3):
+            assert_almost_equal(vec[i], vec1[i])
+
+def test_quat_x_to_vec_keep_z():
+    vecs = np.random.random((100, 3)) - 0.5
+    for vec in vecs:
+        vec = Ska.quatutil._norm(vec)
+        q = Ska.quatutil.quat_x_to_vec(vec, keep_z=True)
+        vec1 = np.dot(q.transform, [1., 0, 0])
+        for i in range(3):
+            assert_almost_equal(vec[i], vec1[i])
+            
+        vec1 = np.dot(q.transform, [0, 0, 1.0])
+        assert_almost_equal(vec1[1], 0.0)
+

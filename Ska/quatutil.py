@@ -1,5 +1,6 @@
 import numpy as np
 from numpy import sin, cos, tan, arctan2, radians, degrees, sqrt
+from Quaternion import Quat
 
 def radec2eci(ra, dec):
     """
@@ -70,3 +71,51 @@ def yagzag2radec(yag, zag, q):
     d_aca *= 1.0 / np.sum(d_aca**2)
     eci = np.dot(q.transform, d_aca)
     return eci2radec(eci);
+
+def _norm(vec):
+    return vec / np.sqrt(np.sum(vec**2))
+
+def quat_x_to_vec(vec, keep_z=True):
+    """Generate quaternion that rotates X-axis into ``vec``.
+
+    The ``keep_z`` parameter addresses the degeneracy in the roll about the X-axis
+    when making the transformation: one is free to do an arbitrary roll
+    about the X-axis before transforming the X-axis to the desired ``vec``.  With
+    ``keep_z == True`` the roll theta is set by requiring that the transformed
+    Z-axis is in the original X-Z plane.  In equations::
+
+      T: "shortest" quaternion taking X-axis to vec
+      Rx(theta): Rotation by theta about X-axis = [[1,0,0], [0,c,s], [0,-s,c]]
+      Z: Z-axis [0,0,1]
+
+      [T * Rx(theta) * Z]_y = 0
+      T[1,1] * sin(theta) + T[1,2]*cos(theta) = 0
+      theta = atan2(T[1,2], T[1,1]) 
+
+    :param vec: Input 3-vector
+    :param keep_z: maintain the Z-axis in the original X-Z plane (default=True)
+    :returns: Quaternion object
+    """
+    x = np.array([1.,0,0])
+    vec = _norm(np.array(vec))
+    dot = np.dot(x, vec)
+    if abs(dot) > 1-1e-8:
+        x = _norm(np.array([1., 0., 1e-7]))
+        dot = np.dot(vec, x)
+    angle = np.arccos(dot)
+    axis = _norm(np.cross(x, vec))
+    sin_a = np.sin(angle / 2)
+    cos_a = np.cos(angle / 2)
+    q = Quat([axis[0] * sin_a,
+              axis[1] * sin_a,
+              axis[2] * sin_a,
+              cos_a])
+
+    if keep_z:
+        T = q.transform
+        theta = np.arctan2(T[1,2], T[1,1])
+        qroll = Quat([0, 0, degrees(theta)])
+        q = q * qroll
+
+    return q
+
