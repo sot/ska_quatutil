@@ -75,14 +75,15 @@ def yagzag2radec(yag, zag, q):
 def _norm(vec):
     return vec / np.sqrt(np.sum(vec**2))
 
-def quat_x_to_vec(vec, keep_z=True):
+def quat_x_to_vec(vec, method='radec'):
     """Generate quaternion that rotates X-axis into ``vec``.
 
-    The ``keep_z`` parameter addresses the degeneracy in the roll about the X-axis
-    when making the transformation: one is free to do an arbitrary roll
-    about the X-axis before transforming the X-axis to the desired ``vec``.  With
-    ``keep_z == True`` the roll theta is set by requiring that the transformed
-    Z-axis is in the original X-Z plane.  In equations::
+    The ``method`` parameter can take one of three values: "shortest",
+    "keep_z", or "radec" (default).  The "shortest" method takes the shortest
+    path between the two vectors.  The "radec" method does the transformation
+    as the corresponding (RA, Dec, Roll=0) attitude.  The "keep_z" method does
+    a roll about X-axis (followed by the "shortest" path) such that the
+    transformed Z-axis is in the original X-Z plane.  In equations::
 
       T: "shortest" quaternion taking X-axis to vec
       Rx(theta): Rotation by theta about X-axis = [[1,0,0], [0,c,s], [0,-s,c]]
@@ -93,29 +94,34 @@ def quat_x_to_vec(vec, keep_z=True):
       theta = atan2(T[1,2], T[1,1]) 
 
     :param vec: Input 3-vector
-    :param keep_z: maintain the Z-axis in the original X-Z plane (default=True)
+    :param method: method for determining path (shortest|keep_z|radec)
     :returns: Quaternion object
     """
     x = np.array([1.,0,0])
     vec = _norm(np.array(vec))
-    dot = np.dot(x, vec)
-    if abs(dot) > 1-1e-8:
-        x = _norm(np.array([1., 0., 1e-7]))
-        dot = np.dot(vec, x)
-    angle = np.arccos(dot)
-    axis = _norm(np.cross(x, vec))
-    sin_a = np.sin(angle / 2)
-    cos_a = np.cos(angle / 2)
-    q = Quat([axis[0] * sin_a,
-              axis[1] * sin_a,
-              axis[2] * sin_a,
-              cos_a])
+    if method in ("shortest", "keep_z"):
+        dot = np.dot(x, vec)
+        if abs(dot) > 1-1e-8:
+            x = _norm(np.array([1., 0., 1e-7]))
+            dot = np.dot(vec, x)
+        angle = np.arccos(dot)
+        axis = _norm(np.cross(x, vec))
+        sin_a = np.sin(angle / 2)
+        cos_a = np.cos(angle / 2)
+        q = Quat([axis[0] * sin_a,
+                  axis[1] * sin_a,
+                  axis[2] * sin_a,
+                  cos_a])
 
-    if keep_z:
-        T = q.transform
-        theta = np.arctan2(T[1,2], T[1,1])
-        qroll = Quat([0, 0, degrees(theta)])
-        q = q * qroll
+        if method == "keep_z":
+            T = q.transform
+            theta = np.arctan2(T[1,2], T[1,1])
+            qroll = Quat([0, 0, degrees(theta)])
+            q = q * qroll
+    else:
+        ra = np.degrees(np.arctan2(vec[1], vec[0]))
+        dec = np.degrees(np.arcsin(vec[2]))
+        q = Quat([ra, dec, 0])
 
     return q
 

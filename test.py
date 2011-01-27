@@ -61,20 +61,14 @@ def test_quat_x_to_vec():
     vecs = np.random.random((100, 3)) - 0.5
     for vec in vecs:
         vec = Ska.quatutil._norm(vec)
-        q = Ska.quatutil.quat_x_to_vec(vec, keep_z=False)
-        vec1 = np.dot(q.transform, [1.0, 0, 0])
-        for i in range(3):
-            assert_almost_equal(vec[i], vec1[i])
-
-def test_quat_x_to_vec_keep_z():
-    vecs = np.random.random((100, 3)) - 0.5
-    for vec in vecs:
-        vec = Ska.quatutil._norm(vec)
-        q = Ska.quatutil.quat_x_to_vec(vec, keep_z=True)
-        vec1 = np.dot(q.transform, [1., 0, 0])
-        for i in range(3):
-            assert_almost_equal(vec[i], vec1[i])
-            
-        vec1 = np.dot(q.transform, [0, 0, 1.0])
-        assert_almost_equal(vec1[1], 0.0)
-
+        for method in ('keep_z', 'shortest', 'radec'):
+            q = Ska.quatutil.quat_x_to_vec(vec, method)
+            vec1 = np.dot(q.transform, [1.0, 0, 0])
+            print method, vec, vec1
+            for i in range(3):
+                assert_almost_equal(vec[i], vec1[i])
+            if method == 'radec':
+                assert_almost_equal(q.roll, 0.0)
+            elif method == 'keep_z':
+                vec1 = np.dot(q.transform, [0, 0, 1.0])
+                assert_almost_equal(vec1[1], 0.0)
