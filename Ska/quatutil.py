@@ -28,11 +28,10 @@ def eci2radec(eci):
     ra  = degrees(arctan2(eci[1], eci[0]))
     dec = degrees(arctan2(eci[2], sqrt(eci[1]**2 + eci[0]**2)))
     ok = ra < 0
-    try:
+    if isinstance(ok, np.ndarray):
         ra[ok] += 360
-    except (ValueError, IndexError):
-        if ok:
-            ra += 360
+    elif ok:
+        ra += 360
     return ra, dec
 
 def radec2yagzag(ra, dec, q):
