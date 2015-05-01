@@ -29,6 +29,18 @@ def test_eci2radec():
     assert_almost_equal(tra, 9.9999999129952908 )
     assert_almost_equal(tdec, 19.999999794004037)
 
+
+def test_vectorized_eci2radec():
+    eci = np.array([[ 0.92541658,  0.9248273 ],
+                    [ 0.16317591, -0.16307201],
+                    [ 0.34202014,  0.34365969]])
+    tra, tdec = Ska.quatutil.eci2radec(eci)
+    assert_almost_equal(tra[0], 9.9999999129952908)
+    assert_almost_equal(tra[1], 349.9999997287627)
+    assert_almost_equal(tdec[0], 19.999999794004037)
+    assert_almost_equal(tdec[1], 20.099999743270516)
+
+
 def test_yagzag2radec():
     yag = 0.35751029916939936
     zag = -0.32107186086370215
