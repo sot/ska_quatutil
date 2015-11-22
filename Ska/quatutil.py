@@ -2,6 +2,9 @@ import numpy as np
 from numpy import sin, cos, tan, arctan2, radians, degrees, sqrt
 from Quaternion import Quat
 
+__version__ = '0.3.1'
+
+
 def radec2eci(ra, dec):
     """
     Convert from RA,Dec to ECI.  The input ``ra`` and ``dec`` values can be 1-d
