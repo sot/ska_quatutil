@@ -76,7 +76,7 @@ def test_quat_x_to_vec():
         for method in ('keep_z', 'shortest', 'radec'):
             q = Ska.quatutil.quat_x_to_vec(vec, method)
             vec1 = np.dot(q.transform, [1.0, 0, 0])
-            print method, vec, vec1
+            print(method, vec, vec1)
             for i in range(3):
                 assert_almost_equal(vec[i], vec1[i])
             if method == 'radec':
