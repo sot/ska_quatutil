@@ -1,3 +1,4 @@
+# Licensed under a 3-clause BSD style license - see LICENSE.rst
 import numpy as np
 from numpy import sin, cos, tan, arctan2, radians, degrees, sqrt
 from Quaternion import Quat
