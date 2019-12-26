@@ -18,6 +18,7 @@ def radec2eci(ra, dec):
     d = radians(dec)
     return np.array([cos(r) * cos(d), sin(r) * cos(d), sin(d)])
 
+
 def eci2radec(eci):
     """
     Convert from ECI vector(s) to RA, Dec.  The input ``eci`` value
@@ -27,7 +28,7 @@ def eci2radec(eci):
     :param eci: ECI as 3-vector or (3,N) array
     :rtype: list ra, dec (degrees)
     """
-    ra  = degrees(arctan2(eci[1], eci[0]))
+    ra = degrees(arctan2(eci[1], eci[0]))
     dec = degrees(arctan2(eci[2], sqrt(eci[1]**2 + eci[0]**2)))
     ok = ra < 0
     if isinstance(ok, np.ndarray):
@@ -36,22 +37,24 @@ def eci2radec(eci):
         ra += 360
     return ra, dec
 
+
 def radec2yagzag(ra, dec, q):
     """
     Given RA, Dec, and pointing quaternion, determine ACA Y-ang, Z-ang.  The
     input ``ra`` and ``dec`` values can be 1-d arrays in which case the output
     ``yag`` and ``zag`` will be corresponding arrays of the same length.
 
-    :param ra: Right Ascension (degrees) 
-    :param dec: Declination (degrees) 
-    :param q: Quaternion 
+    :param ra: Right Ascension (degrees)
+    :param dec: Declination (degrees)
+    :param q: Quaternion
     :rtype: list yag, zag (degrees)
     """
-    eci = radec2eci(ra, dec);
+    eci = radec2eci(ra, dec)
     d_aca = np.dot(q.transform.transpose(), eci)
     yag = degrees(arctan2(d_aca[1], d_aca[0]))
     zag = degrees(arctan2(d_aca[2], d_aca[0]))
     return yag, zag
+
 
 def yagzag2radec(yag, zag, q):
     """
@@ -71,10 +74,12 @@ def yagzag2radec(yag, zag, q):
     d_aca = np.array([one, tan(radians(yag)), tan(radians(zag))])
     d_aca *= 1.0 / np.sum(d_aca**2)
     eci = np.dot(q.transform, d_aca)
-    return eci2radec(eci);
+    return eci2radec(eci)
+
 
 def _norm(vec):
     return vec / np.sqrt(np.sum(vec**2))
+
 
 def quat_x_to_vec(vec, method='radec'):
     """Generate quaternion that rotates X-axis into ``vec``.
@@ -92,17 +97,17 @@ def quat_x_to_vec(vec, method='radec'):
 
       [T * Rx(theta) * Z]_y = 0
       T[1,1] * sin(theta) + T[1,2]*cos(theta) = 0
-      theta = atan2(T[1,2], T[1,1]) 
+      theta = atan2(T[1,2], T[1,1])
 
     :param vec: Input 3-vector
     :param method: method for determining path (shortest|keep_z|radec)
     :returns: Quaternion object
     """
-    x = np.array([1.,0,0])
+    x = np.array([1., 0, 0])
     vec = _norm(np.array(vec))
     if method in ("shortest", "keep_z"):
         dot = np.dot(x, vec)
-        if abs(dot) > 1-1e-8:
+        if abs(dot) > 1 - 1e-8:
             x = _norm(np.array([1., 0., 1e-7]))
             dot = np.dot(vec, x)
         angle = np.arccos(dot)
@@ -116,7 +121,7 @@ def quat_x_to_vec(vec, method='radec'):
 
         if method == "keep_z":
             T = q.transform
-            theta = np.arctan2(T[1,2], T[1,1])
+            theta = np.arctan2(T[1, 2], T[1, 1])
             qroll = Quat([0, 0, degrees(theta)])
             q = q * qroll
     else:
@@ -125,4 +130,3 @@ def quat_x_to_vec(vec, method='radec'):
         q = Quat([ra, dec, 0])
 
     return q
-
