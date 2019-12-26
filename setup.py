@@ -3,6 +3,11 @@ from setuptools import setup
 
 from Ska.quatutil import __version__
 
+try:
+    from testr.setup_helper import cmdclass
+except ImportError:
+    cmdclass = {}
+
 setup(name='Ska.quatutil',
       author = 'Tom Aldcroft',
       description='ACA quaternion utilities',
@@ -13,5 +18,7 @@ setup(name='Ska.quatutil',
       zip_safe=False,
       packages=['Ska'],
       package_dir={'Ska' : 'Ska'},
-      package_data={}
+      package_data={},
+      tests_require=['pytest'],
+      cmdclass=cmdclass,
       )

@@ -3,8 +3,6 @@ import numpy as np
 from numpy import sin, cos, tan, arctan2, radians, degrees, sqrt
 from Quaternion import Quat
 
-__version__ = '3.3.2'
-
 
 def radec2eci(ra, dec):
     """
