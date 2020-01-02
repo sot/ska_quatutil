@@ -78,7 +78,7 @@ def test_vectorized_yagzag():
 def test_quat_x_to_vec():
     vecs = np.random.random((100, 3)) - 0.5
     for vec in vecs:
-        vec = Ska.quatutil._norm(vec)
+        vec = Ska.quatutil.norm(vec)
         for method in ('keep_z', 'shortest', 'radec'):
             q = Ska.quatutil.quat_x_to_vec(vec, method)
             vec1 = np.dot(q.transform, [1.0, 0, 0])

@@ -77,7 +77,7 @@ def yagzag2radec(yag, zag, q):
     return eci2radec(eci)
 
 
-def _norm(vec):
+def norm(vec):
     return vec / np.sqrt(np.sum(vec**2))
 
 
@@ -104,14 +104,14 @@ def quat_x_to_vec(vec, method='radec'):
     :returns: Quaternion object
     """
     x = np.array([1., 0, 0])
-    vec = _norm(np.array(vec))
+    vec = norm(np.array(vec))
     if method in ("shortest", "keep_z"):
         dot = np.dot(x, vec)
         if abs(dot) > 1 - 1e-8:
-            x = _norm(np.array([1., 0., 1e-7]))
+            x = norm(np.array([1., 0., 1e-7]))
             dot = np.dot(vec, x)
         angle = np.arccos(dot)
-        axis = _norm(np.cross(x, vec))
+        axis = norm(np.cross(x, vec))
         sin_a = np.sin(angle / 2)
         cos_a = np.cos(angle / 2)
         q = Quat([axis[0] * sin_a,
