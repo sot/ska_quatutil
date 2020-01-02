@@ -15,7 +15,7 @@ setup(name='Ska.quatutil',
       url='http://cxc.harvard.edu/mta/ASPECT/tool_doc/pydocs/Ska.quatutil.html',
       version=__version__,
       zip_safe=False,
-      packages=['Ska'],
+      packages=['Ska', 'Ska.quatutil', 'Ska.quatutil.tests'],
       tests_require=['pytest'],
       cmdclass=cmdclass,
       )
