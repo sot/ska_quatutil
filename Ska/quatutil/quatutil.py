@@ -5,7 +5,7 @@ from Quaternion import Quat
 
 import ska_helpers
 
-__version__ = ska_helpers.get_version('Ska.quatutil')
+__version__ = ska_helpers.get_version(__package__)
 
 
 def radec2eci(ra, dec):
