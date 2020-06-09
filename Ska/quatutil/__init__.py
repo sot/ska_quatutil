@@ -1,6 +1,7 @@
 # Licensed under a 3-clause BSD style license - see LICENSE.rst
 
-__version__ = '3.3.2'
+import ska_helpers
+__version__ = ska_helpers.get_version('Ska.quatutil')
 
 from .quatutil import *  # noqa
 
