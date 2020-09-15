@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ska.quatutil.quatutil &#8212; Ska.quatutil 3.3.4.dev7+g2dc688c documentation</title>
+    <link rel="stylesheet" href="../../../_static/bootstrap-astropy.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../../_static/sidebar.js"></script>
+    <script type="text/javascript" src="../../../_static/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600' rel='stylesheet' type='text/css'/>
+
+  </head><body>
+<div class="topbar">
+  <a class="brand" title="Documentation Home" href="../../../index.html"><span id="logotext1">Ska! </span><span id="logotext2">Ska</span><span id="logotext3">.quatutil</span></a>
+  <ul>
+    
+    <li><a class="home" title="Homepage" href="">
+        <span id="logotext1"></span><span id="logotext2"></span>
+    </a></li>
+    <li><a title="General Index" href="../../../genindex.html">Index</a></li>
+    <li><a title="Module Index" href="../../../py-modindex.html">Modules</a></li>
+    <li>
+      
+      
+<form action="../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+      
+    </li>
+  </ul>
+</div>
+
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+      <li>
+	<a href="../../../index.html">Ska.quatutil 3.3.4.dev7+g2dc688c documentation</a>
+	 &#187;
+      </li>
+      <li><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+      
+       
+    </ul>
+</div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for Ska.quatutil.quatutil</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Licensed under a 3-clause BSD style license - see LICENSE.rst</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">tan</span><span class="p">,</span> <span class="n">arctan2</span><span class="p">,</span> <span class="n">radians</span><span class="p">,</span> <span class="n">degrees</span><span class="p">,</span> <span class="n">sqrt</span>
+<span class="kn">from</span> <span class="nn">Quaternion</span> <span class="kn">import</span> <span class="n">Quat</span>
+
+
+<div class="viewcode-block" id="radec2eci"><a class="viewcode-back" href="../../../index.html#Ska.quatutil.quatutil.radec2eci">[docs]</a><span class="k">def</span> <span class="nf">radec2eci</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert from RA,Dec to ECI.  The input ``ra`` and ``dec`` values can be 1-d</span>
+<span class="sd">    arrays of length N in which case the output ``ECI`` will be an array with</span>
+<span class="sd">    shape (3,N).</span>
+
+<span class="sd">    :param ra: Right Ascension (degrees)</span>
+<span class="sd">    :param dec: Declination (degrees)</span>
+<span class="sd">    :returns: numpy array ECI (3-vector or 3xN array)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">radians</span><span class="p">(</span><span class="n">ra</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">radians</span><span class="p">(</span><span class="n">dec</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cos</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span></div>
+
+
+<div class="viewcode-block" id="eci2radec"><a class="viewcode-back" href="../../../index.html#Ska.quatutil.quatutil.eci2radec">[docs]</a><span class="k">def</span> <span class="nf">eci2radec</span><span class="p">(</span><span class="n">eci</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert from ECI vector(s) to RA, Dec.  The input ``eci`` value</span>
+<span class="sd">    can be an array of 3-vectors having shape (3,N) in which case</span>
+<span class="sd">    the output RA, Dec will be arrays of length N.</span>
+
+<span class="sd">    :param eci: ECI as 3-vector or (3,N) array</span>
+<span class="sd">    :rtype: list ra, dec (degrees)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ra</span> <span class="o">=</span> <span class="n">degrees</span><span class="p">(</span><span class="n">arctan2</span><span class="p">(</span><span class="n">eci</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">eci</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">dec</span> <span class="o">=</span> <span class="n">degrees</span><span class="p">(</span><span class="n">arctan2</span><span class="p">(</span><span class="n">eci</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">eci</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">eci</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="n">ok</span> <span class="o">=</span> <span class="n">ra</span> <span class="o">&lt;</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ok</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">ra</span><span class="p">[</span><span class="n">ok</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">360</span>
+    <span class="k">elif</span> <span class="n">ok</span><span class="p">:</span>
+        <span class="n">ra</span> <span class="o">+=</span> <span class="mi">360</span>
+    <span class="k">return</span> <span class="n">ra</span><span class="p">,</span> <span class="n">dec</span></div>
+
+
+<div class="viewcode-block" id="radec2yagzag"><a class="viewcode-back" href="../../../index.html#Ska.quatutil.quatutil.radec2yagzag">[docs]</a><span class="k">def</span> <span class="nf">radec2yagzag</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given RA, Dec, and pointing quaternion, determine ACA Y-ang, Z-ang.  The</span>
+<span class="sd">    input ``ra`` and ``dec`` values can be 1-d arrays in which case the output</span>
+<span class="sd">    ``yag`` and ``zag`` will be corresponding arrays of the same length.</span>
+
+<span class="sd">    :param ra: Right Ascension (degrees)</span>
+<span class="sd">    :param dec: Declination (degrees)</span>
+<span class="sd">    :param q: Quaternion</span>
+<span class="sd">    :rtype: list yag, zag (degrees)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">eci</span> <span class="o">=</span> <span class="n">radec2eci</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span>
+    <span class="n">d_aca</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">transform</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">eci</span><span class="p">)</span>
+    <span class="n">yag</span> <span class="o">=</span> <span class="n">degrees</span><span class="p">(</span><span class="n">arctan2</span><span class="p">(</span><span class="n">d_aca</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">d_aca</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">zag</span> <span class="o">=</span> <span class="n">degrees</span><span class="p">(</span><span class="n">arctan2</span><span class="p">(</span><span class="n">d_aca</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">d_aca</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">yag</span><span class="p">,</span> <span class="n">zag</span></div>
+
+
+<div class="viewcode-block" id="yagzag2radec"><a class="viewcode-back" href="../../../index.html#Ska.quatutil.quatutil.yagzag2radec">[docs]</a><span class="k">def</span> <span class="nf">yagzag2radec</span><span class="p">(</span><span class="n">yag</span><span class="p">,</span> <span class="n">zag</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given ACA Y-ang, Z-ang and pointing quaternion determine RA, Dec. The</span>
+<span class="sd">    input ``yag`` and ``zag`` values can be 1-d arrays in which case the output</span>
+<span class="sd">    ``ra`` and ``dec`` will be corresponding arrays of the same length.</span>
+
+<span class="sd">    :param yag: ACA Y angle (degrees)</span>
+<span class="sd">    :param zag: ACA Z angle (degrees)</span>
+<span class="sd">    :param q: Quaternion</span>
+<span class="sd">    :rtype: list ra, dec (degrees)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">one</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">yag</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="n">one</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">d_aca</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">one</span><span class="p">,</span> <span class="n">tan</span><span class="p">(</span><span class="n">radians</span><span class="p">(</span><span class="n">yag</span><span class="p">)),</span> <span class="n">tan</span><span class="p">(</span><span class="n">radians</span><span class="p">(</span><span class="n">zag</span><span class="p">))])</span>
+    <span class="n">d_aca</span> <span class="o">*=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">d_aca</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">eci</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span> <span class="n">d_aca</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">eci2radec</span><span class="p">(</span><span class="n">eci</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">norm</span><span class="p">(</span><span class="n">vec</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">vec</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vec</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="quat_x_to_vec"><a class="viewcode-back" href="../../../index.html#Ska.quatutil.quatutil.quat_x_to_vec">[docs]</a><span class="k">def</span> <span class="nf">quat_x_to_vec</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;radec&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate quaternion that rotates X-axis into ``vec``.</span>
+
+<span class="sd">    The ``method`` parameter can take one of three values: &quot;shortest&quot;,</span>
+<span class="sd">    &quot;keep_z&quot;, or &quot;radec&quot; (default).  The &quot;shortest&quot; method takes the shortest</span>
+<span class="sd">    path between the two vectors.  The &quot;radec&quot; method does the transformation</span>
+<span class="sd">    as the corresponding (RA, Dec, Roll=0) attitude.  The &quot;keep_z&quot; method does</span>
+<span class="sd">    a roll about X-axis (followed by the &quot;shortest&quot; path) such that the</span>
+<span class="sd">    transformed Z-axis is in the original X-Z plane.  In equations::</span>
+
+<span class="sd">      T: &quot;shortest&quot; quaternion taking X-axis to vec</span>
+<span class="sd">      Rx(theta): Rotation by theta about X-axis = [[1,0,0], [0,c,s], [0,-s,c]]</span>
+<span class="sd">      Z: Z-axis [0,0,1]</span>
+
+<span class="sd">      [T * Rx(theta) * Z]_y = 0</span>
+<span class="sd">      T[1,1] * sin(theta) + T[1,2]*cos(theta) = 0</span>
+<span class="sd">      theta = atan2(T[1,2], T[1,1])</span>
+
+<span class="sd">    :param vec: Input 3-vector</span>
+<span class="sd">    :param method: method for determining path (shortest|keep_z|radec)</span>
+<span class="sd">    :returns: Quaternion object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">vec</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;shortest&quot;</span><span class="p">,</span> <span class="s2">&quot;keep_z&quot;</span><span class="p">):</span>
+        <span class="n">dot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">vec</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dot</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">1e-8</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1e-7</span><span class="p">]))</span>
+            <span class="n">dot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">dot</span><span class="p">)</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">vec</span><span class="p">))</span>
+        <span class="n">sin_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">cos_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">Quat</span><span class="p">([</span><span class="n">axis</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">sin_a</span><span class="p">,</span>
+                  <span class="n">axis</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">sin_a</span><span class="p">,</span>
+                  <span class="n">axis</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">sin_a</span><span class="p">,</span>
+                  <span class="n">cos_a</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;keep_z&quot;</span><span class="p">:</span>
+            <span class="n">T</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">transform</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">qroll</span> <span class="o">=</span> <span class="n">Quat</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">degrees</span><span class="p">(</span><span class="n">theta</span><span class="p">)])</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">q</span> <span class="o">*</span> <span class="n">qroll</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ra</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="n">dec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">Quat</span><span class="p">([</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">q</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Page Contents</h3>
+
+
+<form action="../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+<footer class="footer">
+  <p class="pull-right"> &nbsp;
+    <a href="#">Back to Top</a></p>
+  <p>
+    &copy; Copyright 2020, Tom Aldcroft.<br/>
+    Created using <a href="http://www.sphinx-doc.org/en/stable/">Sphinx</a> 3.1.2. &nbsp;
+  </p>
+</footer>
+  </body>
+</html>
