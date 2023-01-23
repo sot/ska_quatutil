@@ -1,5 +1,5 @@
-:mod:`Ska.quatutil`
+:mod:`ska_quatutil`
 ======================
 
-.. automodule:: Ska.quatutil.quatutil
+.. automodule:: ska_quatutil.quatutil
    :members:

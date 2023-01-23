@@ -4,36 +4,35 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ska.quatutil.quatutil &#8212; Ska.quatutil 3.4.0 documentation</title>
-    <link rel="stylesheet" href="../../../_static/bootstrap-astropy.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ska_quatutil.quatutil &#8212; ska_quatutil 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-astropy.css" />
     
-    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/language_data.js"></script>
-    <script type="text/javascript" src="../../../_static/sidebar.js"></script>
-    <script type="text/javascript" src="../../../_static/copybutton.js"></script>
-    <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <script type="text/javascript" src="../../_static/copybutton.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600' rel='stylesheet' type='text/css'/>
 
   </head><body>
 <div class="topbar">
-  <a class="brand" title="Documentation Home" href="../../../index.html"><span id="logotext1">Ska! </span><span id="logotext2">Ska</span><span id="logotext3">.quatutil</span></a>
+  <a class="brand" title="Documentation Home" href="../../index.html"><span id="logotext1">Ska! </span><span id="logotext2">ska_quatutil</span><span id="logotext3"></span></a>
   <ul>
     
     <li><a class="home" title="Homepage" href="https://cxc.cfa.harvard.edu/mta/ASPECT/tool_doc">
         <span id="logotext1">ska</span><span id="logotext2">tools</span>
     </a></li>
-    <li><a title="General Index" href="../../../genindex.html">Index</a></li>
-    <li><a title="Module Index" href="../../../py-modindex.html">Modules</a></li>
+    <li><a title="General Index" href="../../genindex.html">Index</a></li>
+    <li><a title="Module Index" href="../../py-modindex.html">Modules</a></li>
     <li>
       
       
-<form action="../../../search.html" method="get">
+<form action="../../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <input type="hidden" name="check_keywords" value="yes" />
   <input type="hidden" name="area" value="default" />
@@ -47,10 +46,10 @@
     <h3>Navigation</h3>
     <ul>
       <li>
-	<a href="../../../index.html">Ska.quatutil 3.4.0 documentation</a>
+	<a href="../../index.html">ska_quatutil 4.0.0 documentation</a>
 	 &#187;
       </li>
-      <li><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+      <li><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
       
        
     </ul>
@@ -62,14 +61,14 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>Source code for Ska.quatutil.quatutil</h1><div class="highlight"><pre>
+  <h1>Source code for ska_quatutil.quatutil</h1><div class="highlight"><pre>
 <span></span><span class="c1"># Licensed under a 3-clause BSD style license - see LICENSE.rst</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">tan</span><span class="p">,</span> <span class="n">arctan2</span><span class="p">,</span> <span class="n">radians</span><span class="p">,</span> <span class="n">degrees</span><span class="p">,</span> <span class="n">sqrt</span>
 <span class="kn">from</span> <span class="nn">Quaternion</span> <span class="kn">import</span> <span class="n">Quat</span>
 
 
-<div class="viewcode-block" id="radec2eci"><a class="viewcode-back" href="../../../index.html#Ska.quatutil.quatutil.radec2eci">[docs]</a><span class="k">def</span> <span class="nf">radec2eci</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">):</span>
+<div class="viewcode-block" id="radec2eci"><a class="viewcode-back" href="../../index.html#ska_quatutil.quatutil.radec2eci">[docs]</a><span class="k">def</span> <span class="nf">radec2eci</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert from RA,Dec to ECI.  The input ``ra`` and ``dec`` values can be 1-d</span>
 <span class="sd">    arrays of length N in which case the output ``ECI`` will be an array with</span>
@@ -84,7 +83,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cos</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">d</span><span class="p">)])</span></div>
 
 
-<div class="viewcode-block" id="eci2radec"><a class="viewcode-back" href="../../../index.html#Ska.quatutil.quatutil.eci2radec">[docs]</a><span class="k">def</span> <span class="nf">eci2radec</span><span class="p">(</span><span class="n">eci</span><span class="p">):</span>
+<div class="viewcode-block" id="eci2radec"><a class="viewcode-back" href="../../index.html#ska_quatutil.quatutil.eci2radec">[docs]</a><span class="k">def</span> <span class="nf">eci2radec</span><span class="p">(</span><span class="n">eci</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert from ECI vector(s) to RA, Dec.  The input ``eci`` value</span>
 <span class="sd">    can be an array of 3-vectors having shape (3,N) in which case</span>
@@ -103,7 +102,7 @@
     <span class="k">return</span> <span class="n">ra</span><span class="p">,</span> <span class="n">dec</span></div>
 
 
-<div class="viewcode-block" id="radec2yagzag"><a class="viewcode-back" href="../../../index.html#Ska.quatutil.quatutil.radec2yagzag">[docs]</a><span class="k">def</span> <span class="nf">radec2yagzag</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+<div class="viewcode-block" id="radec2yagzag"><a class="viewcode-back" href="../../index.html#ska_quatutil.quatutil.radec2yagzag">[docs]</a><span class="k">def</span> <span class="nf">radec2yagzag</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given RA, Dec, and pointing quaternion, determine ACA Y-ang, Z-ang.  The</span>
 <span class="sd">    input ``ra`` and ``dec`` values can be 1-d arrays in which case the output</span>
@@ -121,7 +120,7 @@
     <span class="k">return</span> <span class="n">yag</span><span class="p">,</span> <span class="n">zag</span></div>
 
 
-<div class="viewcode-block" id="yagzag2radec"><a class="viewcode-back" href="../../../index.html#Ska.quatutil.quatutil.yagzag2radec">[docs]</a><span class="k">def</span> <span class="nf">yagzag2radec</span><span class="p">(</span><span class="n">yag</span><span class="p">,</span> <span class="n">zag</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+<div class="viewcode-block" id="yagzag2radec"><a class="viewcode-back" href="../../index.html#ska_quatutil.quatutil.yagzag2radec">[docs]</a><span class="k">def</span> <span class="nf">yagzag2radec</span><span class="p">(</span><span class="n">yag</span><span class="p">,</span> <span class="n">zag</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given ACA Y-ang, Z-ang and pointing quaternion determine RA, Dec. The</span>
 <span class="sd">    input ``yag`` and ``zag`` values can be 1-d arrays in which case the output</span>
@@ -146,7 +145,7 @@
     <span class="k">return</span> <span class="n">vec</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vec</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 
 
-<div class="viewcode-block" id="quat_x_to_vec"><a class="viewcode-back" href="../../../index.html#Ska.quatutil.quatutil.quat_x_to_vec">[docs]</a><span class="k">def</span> <span class="nf">quat_x_to_vec</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;radec&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="quat_x_to_vec"><a class="viewcode-back" href="../../index.html#ska_quatutil.quatutil.quat_x_to_vec">[docs]</a><span class="k">def</span> <span class="nf">quat_x_to_vec</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;radec&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generate quaternion that rotates X-axis into ``vec``.</span>
 
 <span class="sd">    The ``method`` parameter can take one of three values: &quot;shortest&quot;,</span>
@@ -205,7 +204,7 @@
         <div class="sphinxsidebarwrapper"><h3>Page Contents</h3>
 
 
-<form action="../../../search.html" method="get">
+<form action="../../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <input type="hidden" name="check_keywords" value="yes" />
   <input type="hidden" name="area" value="default" />
@@ -219,7 +218,7 @@
     <a href="#">Back to Top</a></p>
   <p>
     &copy; Copyright 2020, Tom Aldcroft.<br/>
-    Created using <a href="http://www.sphinx-doc.org/en/stable/">Sphinx</a> 3.1.2. &nbsp;
+    Created using <a href="http://www.sphinx-doc.org/en/stable/">Sphinx</a> 4.2.0. &nbsp;
   </p>
 </footer>
   </body>

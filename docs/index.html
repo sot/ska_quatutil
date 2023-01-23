@@ -4,16 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ska.quatutil &#8212; Ska.quatutil 3.4.0 documentation</title>
-    <link rel="stylesheet" href="_static/bootstrap-astropy.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>ska_quatutil &#8212; ska_quatutil 4.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bootstrap-astropy.css" />
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     <script type="text/javascript" src="_static/sidebar.js"></script>
     <script type="text/javascript" src="_static/copybutton.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -22,7 +22,7 @@
 
   </head><body>
 <div class="topbar">
-  <a class="brand" title="Documentation Home" href="#"><span id="logotext1">Ska! </span><span id="logotext2">Ska</span><span id="logotext3">.quatutil</span></a>
+  <a class="brand" title="Documentation Home" href="#"><span id="logotext1">Ska! </span><span id="logotext2">ska_quatutil</span><span id="logotext3"></span></a>
   <ul>
     
     <li><a class="home" title="Homepage" href="https://cxc.cfa.harvard.edu/mta/ASPECT/tool_doc">
@@ -47,7 +47,7 @@
     <h3>Navigation</h3>
     <ul>
       <li>
-	<a href="#">Ska.quatutil 3.4.0 documentation</a>
+	<a href="#">ska_quatutil 4.0.0 documentation</a>
 	 &#187;
       </li>
       
@@ -61,11 +61,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-Ska.quatutil.quatutil">
-<span id="ska-quatutil"></span><h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">Ska.quatutil</span></code><a class="headerlink" href="#module-Ska.quatutil.quatutil" title="Permalink to this headline">¶</a></h1>
+  <section id="module-ska_quatutil.quatutil">
+<span id="ska-quatutil"></span><h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">ska_quatutil</span></code><a class="headerlink" href="#module-ska_quatutil.quatutil" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="Ska.quatutil.quatutil.eci2radec">
-<code class="sig-prename descclassname">Ska.quatutil.quatutil.</code><code class="sig-name descname">eci2radec</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eci</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Ska/quatutil/quatutil.html#eci2radec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Ska.quatutil.quatutil.eci2radec" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ska_quatutil.quatutil.eci2radec">
+<span class="sig-prename descclassname"><span class="pre">ska_quatutil.quatutil.</span></span><span class="sig-name descname"><span class="pre">eci2radec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eci</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ska_quatutil/quatutil.html#eci2radec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ska_quatutil.quatutil.eci2radec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert from ECI vector(s) to RA, Dec.  The input <code class="docutils literal notranslate"><span class="pre">eci</span></code> value
 can be an array of 3-vectors having shape (3,N) in which case
 the output RA, Dec will be arrays of length N.</p>
@@ -80,8 +80,8 @@ the output RA, Dec will be arrays of length N.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="Ska.quatutil.quatutil.quat_x_to_vec">
-<code class="sig-prename descclassname">Ska.quatutil.quatutil.</code><code class="sig-name descname">quat_x_to_vec</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vec</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'radec'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Ska/quatutil/quatutil.html#quat_x_to_vec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Ska.quatutil.quatutil.quat_x_to_vec" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ska_quatutil.quatutil.quat_x_to_vec">
+<span class="sig-prename descclassname"><span class="pre">ska_quatutil.quatutil.</span></span><span class="sig-name descname"><span class="pre">quat_x_to_vec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'radec'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ska_quatutil/quatutil.html#quat_x_to_vec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ska_quatutil.quatutil.quat_x_to_vec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate quaternion that rotates X-axis into <code class="docutils literal notranslate"><span class="pre">vec</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">method</span></code> parameter can take one of three values: “shortest”,
 “keep_z”, or “radec” (default).  The “shortest” method takes the shortest
@@ -112,8 +112,8 @@ transformed Z-axis is in the original X-Z plane.  In equations:</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="Ska.quatutil.quatutil.radec2eci">
-<code class="sig-prename descclassname">Ska.quatutil.quatutil.</code><code class="sig-name descname">radec2eci</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ra</span></em>, <em class="sig-param"><span class="n">dec</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Ska/quatutil/quatutil.html#radec2eci"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Ska.quatutil.quatutil.radec2eci" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ska_quatutil.quatutil.radec2eci">
+<span class="sig-prename descclassname"><span class="pre">ska_quatutil.quatutil.</span></span><span class="sig-name descname"><span class="pre">radec2eci</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ra</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ska_quatutil/quatutil.html#radec2eci"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ska_quatutil.quatutil.radec2eci" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert from RA,Dec to ECI.  The input <code class="docutils literal notranslate"><span class="pre">ra</span></code> and <code class="docutils literal notranslate"><span class="pre">dec</span></code> values can be 1-d
 arrays of length N in which case the output <code class="docutils literal notranslate"><span class="pre">ECI</span></code> will be an array with
 shape (3,N).</p>
@@ -131,8 +131,8 @@ shape (3,N).</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="Ska.quatutil.quatutil.radec2yagzag">
-<code class="sig-prename descclassname">Ska.quatutil.quatutil.</code><code class="sig-name descname">radec2yagzag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ra</span></em>, <em class="sig-param"><span class="n">dec</span></em>, <em class="sig-param"><span class="n">q</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Ska/quatutil/quatutil.html#radec2yagzag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Ska.quatutil.quatutil.radec2yagzag" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ska_quatutil.quatutil.radec2yagzag">
+<span class="sig-prename descclassname"><span class="pre">ska_quatutil.quatutil.</span></span><span class="sig-name descname"><span class="pre">radec2yagzag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ra</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ska_quatutil/quatutil.html#radec2yagzag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ska_quatutil.quatutil.radec2yagzag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given RA, Dec, and pointing quaternion, determine ACA Y-ang, Z-ang.  The
 input <code class="docutils literal notranslate"><span class="pre">ra</span></code> and <code class="docutils literal notranslate"><span class="pre">dec</span></code> values can be 1-d arrays in which case the output
 <code class="docutils literal notranslate"><span class="pre">yag</span></code> and <code class="docutils literal notranslate"><span class="pre">zag</span></code> will be corresponding arrays of the same length.</p>
@@ -151,8 +151,8 @@ input <code class="docutils literal notranslate"><span class="pre">ra</span></co
 </dd></dl>
 
 <dl class="py function">
-<dt id="Ska.quatutil.quatutil.yagzag2radec">
-<code class="sig-prename descclassname">Ska.quatutil.quatutil.</code><code class="sig-name descname">yagzag2radec</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">yag</span></em>, <em class="sig-param"><span class="n">zag</span></em>, <em class="sig-param"><span class="n">q</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Ska/quatutil/quatutil.html#yagzag2radec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Ska.quatutil.quatutil.yagzag2radec" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="ska_quatutil.quatutil.yagzag2radec">
+<span class="sig-prename descclassname"><span class="pre">ska_quatutil.quatutil.</span></span><span class="sig-name descname"><span class="pre">yagzag2radec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">yag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ska_quatutil/quatutil.html#yagzag2radec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ska_quatutil.quatutil.yagzag2radec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given ACA Y-ang, Z-ang and pointing quaternion determine RA, Dec. The
 input <code class="docutils literal notranslate"><span class="pre">yag</span></code> and <code class="docutils literal notranslate"><span class="pre">zag</span></code> values can be 1-d arrays in which case the output
 <code class="docutils literal notranslate"><span class="pre">ra</span></code> and <code class="docutils literal notranslate"><span class="pre">dec</span></code> will be corresponding arrays of the same length.</p>
@@ -170,7 +170,7 @@ input <code class="docutils literal notranslate"><span class="pre">yag</span></c
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -180,7 +180,7 @@ input <code class="docutils literal notranslate"><span class="pre">yag</span></c
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper"><h3>Page Contents</h3>
 <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Ska.quatutil</span></code></a></li>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ska_quatutil</span></code></a></li>
 </ul>
 
 
@@ -207,7 +207,7 @@ input <code class="docutils literal notranslate"><span class="pre">yag</span></c
     <a href="#">Back to Top</a></p>
   <p>
     &copy; Copyright 2020, Tom Aldcroft.<br/>
-    Created using <a href="http://www.sphinx-doc.org/en/stable/">Sphinx</a> 3.1.2. &nbsp;
+    Created using <a href="http://www.sphinx-doc.org/en/stable/">Sphinx</a> 4.2.0. &nbsp;
   </p>
 </footer>
   </body>
